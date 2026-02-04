@@ -2,229 +2,872 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rahul 💖</title>
+  <title>Be My Valentine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --pink: #ff6b9c;
-      --red: #ff4d6d;
-      --bg1: #0f0c29;
-      --bg2: #302b63;
-      --bg3: #24243e;
-      --glass: rgba(255, 255, 255, 0.12);
+      --bg-gradient: radial-gradient(circle at top left, #ff9aee 0, transparent 55%),
+                     radial-gradient(circle at bottom right, #8b5dff 0, transparent 55%),
+                     linear-gradient(135deg, #12001f, #2b0038 50%, #4a0056 100%);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --accent: #ff77c8;
+      --accent-strong: #ff3f9f;
+      --text-main: #ffffff;
+      --text-muted: #f7d6ff;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --blur: 18px;
+      --transition-fast: 0.3s ease;
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      background: var(--bg-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
       overflow: hidden;
-    }
-
-    .card {
-      background: var(--glass);
-      backdrop-filter: blur(14px);
-      border-radius: 20px;
-      padding: 40px 30px;
-      width: 90%;
-      max-width: 420px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      animation: fadeIn 1.5s ease;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-    }
-
-    .heart {
-      font-size: 2.8rem;
-      animation: beat 1.2s infinite;
-      margin-bottom: 10px;
-    }
-
-    .typing {
-      font-size: 1rem;
-      min-height: 60px;
-      margin: 15px 0 25px;
-      opacity: 0.9;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
       position: relative;
     }
 
-    button {
-      padding: 12px 26px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    #yesBtn {
-      background: linear-gradient(135deg, var(--pink), var(--red));
-      color: #fff;
-      box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
-    }
-
-    #yesBtn:hover {
-      transform: scale(1.08);
-    }
-
-    #maybeBtn {
-      background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.4);
-      position: relative;
-    }
-
-    .final {
-      display: none;
-      animation: fadeIn 1s ease forwards;
-    }
-
-    .final h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-
-    .confetti {
+    /* Background floating hearts */
+    .floating-hearts {
       position: fixed;
-      top: -10px;
-      width: 10px;
-      height: 10px;
-      background: red;
-      animation: fall 3s linear forwards;
-      z-index: 999;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+    .floating-heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle at 30% 30%, #fff 0, #ff73c4 45%, #ff3f9f 75%);
+      transform: rotate(45deg);
+      opacity: 0.18;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 0 6px rgba(255, 120, 200, 0.65));
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .floating-heart::before,
+    .floating-heart::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: inherit;
     }
 
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
+    .floating-heart::before {
+      top: -50%;
+      left: 0;
+    }
+
+    .floating-heart::after {
+      left: -50%;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(45deg) scale(0.7);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.35;
+      }
+      85% {
+        opacity: 0.22;
+      }
+      100% {
+        transform: translateY(-20vh) rotate(45deg) scale(1);
         opacity: 0;
       }
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 1.9rem; }
-      .card { padding: 30px 20px; }
+    /* Layout containers */
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 960px;
+      padding: 24px 18px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-shell {
+      width: 100%;
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.13),
+        rgba(255, 255, 255, 0.03)
+      );
+      border-radius: 26px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 18px 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .card-shell {
+        padding: 30px 32px 36px;
+        border-radius: 30px;
+      }
+    }
+
+    /* Decorative glow ring */
+    .card-shell::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 118, 209, 0.6), transparent 60%);
+      top: -120px;
+      right: -80px;
+      opacity: 0.5;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    /* Heartbeat emblem */
+    .heartbeat-orbit {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.35);
+      top: 16px;
+      left: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .heartbeat-orbit::before {
+      content: "";
+      position: absolute;
+      width: 170%;
+      height: 170%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-top-color: rgba(255, 136, 210, 0.6);
+      border-left-color: rgba(205, 138, 255, 0.6);
+      animation: orbitSpin 24s linear infinite;
+    }
+
+    @keyframes orbitSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .heartbeat {
+      position: relative;
+      width: 60px;
+      height: 54px;
+      transform: scale(1);
+      animation: heartbeat 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(255, 80, 170, 0.85));
+    }
+
+    .heartbeat::before,
+    .heartbeat::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 48px;
+      background: linear-gradient(135deg, #ff9ad7, #ff3f9f);
+      border-radius: 30px 30px 0 0;
+    }
+
+    .heartbeat::before {
+      left: 4px;
+      transform: rotate(-45deg);
+      transform-origin: bottom right;
+    }
+
+    .heartbeat::after {
+      right: 4px;
+      transform: rotate(45deg);
+      transform-origin: bottom left;
+    }
+
+    @keyframes heartbeat {
+      0%,
+      28%,
+      62%,
+      100% {
+        transform: scale(1);
+      }
+      14%,
+      48% {
+        transform: scale(1.15);
+      }
+    }
+
+    /* Content sections */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 800px) {
+      .content {
+        gap: 26px;
+        padding-left: 140px;
+      }
+    }
+
+    .section {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity 0.7s ease-out,
+        transform 0.7s ease-out;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Landing / intro */
+    .intro {
+      text-align: left;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 210, 255, 0.7);
+      margin-bottom: 8px;
+    }
+
+    .intro-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-weight: 600;
+      font-size: 1.9rem;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .intro-title {
+        font-size: 2.3rem;
+      }
+    }
+
+    .intro-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 30rem;
+    }
+
+    .start-cta {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #fff;
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        filter var(--transition-fast);
+    }
+
+    .btn-primary span {
+      font-size: 1.05rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+      box-shadow:
+        0 16px 36px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(255, 124, 196, 0.8);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.55),
+        0 0 12px rgba(255, 124, 196, 0.7);
+    }
+
+    .start-hint {
+      font-size: 0.8rem;
+      color: rgba(255, 226, 255, 0.7);
+    }
+
+    /* Typewriter section */
+    .typewriter-section {
+      margin-top: 4px;
+      min-height: 72px;
+    }
+
+    .typewriter-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255, 215, 255, 0.7);
+      margin-bottom: 6px;
+    }
+
+    .typewriter-bubble {
+      border-radius: 18px;
+      padding: 12px 14px;
+      max-width: 30rem;
+      background: radial-gradient(circle at top left, rgba(255, 153, 228, 0.32), transparent 65%),
+                  rgba(5, 2, 12, 0.4);
+      border: 1px solid rgba(255, 188, 255, 0.45);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .typewriter-text {
+      white-space: pre-wrap;
+      min-height: 1.3em;
+    }
+
+    .typewriter-caret {
+      display: inline-block;
+      width: 8px;
+      margin-left: 2px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 99px;
+      animation: caretBlink 0.9s steps(1, end) infinite;
+    }
+
+    @keyframes caretBlink {
+      0%,
+      50% {
+        opacity: 1;
+      }
+      51%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Compliment cards */
+    .compliments-section {
+      margin-top: 8px;
+    }
+
+    .compliments-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .compliments-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .compliment-card {
+      background: linear-gradient(
+        140deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.04)
+      );
+      border-radius: 18px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 210, 255, 0.4);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .compliment-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(255, 215, 255, 0.8);
+    }
+
+    .compliment-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.05rem;
+    }
+
+    .compliment-body {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Final question */
+    .final-section {
+      margin-top: 10px;
+      border-top: 1px solid rgba(255, 220, 255, 0.25);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .final-question {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.4rem;
+      line-height: 1.25;
+    }
+
+    .final-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-yes,
+    .btn-maybe {
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid rgba(255, 235, 255, 0.7);
+      background: rgba(12, 3, 24, 0.6);
+      color: #ffe9ff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+      transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #ff7ad3, #ff3f9f);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.85);
+    }
+
+    .btn-yes:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.75),
+        0 0 18px rgba(255, 124, 196, 0.9);
+    }
+
+    .btn-maybe {
+      opacity: 0.8;
+    }
+
+    .btn-maybe:hover {
+      transform: translateY(-1px);
+      background: rgba(19, 6, 40, 0.9);
+      opacity: 1;
+    }
+
+    .final-note {
+      font-size: 0.8rem;
+      color: rgba(255, 220, 255, 0.75);
+    }
+
+    /* Confetti hearts */
+    .confetti-layer {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .confetti-heart {
+      position: absolute;
+      font-size: 18px;
+      animation: confettiFall 2.8s cubic-bezier(0.16, 0.74, 0.28, 0.99) forwards;
+      text-shadow: 0 0 10px rgba(255, 120, 200, 0.85);
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg) scale(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) translateX(40px) rotate(520deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* Start overlay (landing state) */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: radial-gradient(circle at top, rgba(24, 3, 44, 0.7), transparent 60%),
+                  rgba(6, 2, 16, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+    }
+
+    .overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .overlay-inner {
+      max-width: 420px;
+      text-align: center;
+      padding: 22px 16px;
+    }
+
+    .overlay-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.7rem;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .overlay-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    /* Visibility control when started */
+    body.started .section {
+      /* base sections become visible (JS toggles .visible) */
     }
   </style>
 </head>
-
 <body>
+  <!-- Background hearts -->
+  <div class="floating-hearts" aria-hidden="true">
+    <!-- Hearts will be appended via JS for variety; some base ones for no-JS feel -->
+    <div class="floating-heart" style="left: 5%; animation-duration: 23s; animation-delay: -8s;"></div>
+    <div class="floating-heart" style="left: 18%; animation-duration: 19s; animation-delay: -4s;"></div>
+    <div class="floating-heart" style="left: 32%; animation-duration: 27s; animation-delay: -10s;"></div>
+    <div class="floating-heart" style="left: 50%; animation-duration: 21s; animation-delay: -16s;"></div>
+    <div class="floating-heart" style="left: 68%; animation-duration: 25s; animation-delay: -7s;"></div>
+    <div class="floating-heart" style="left: 84%; animation-duration: 20s; animation-delay: -12s;"></div>
+  </div>
 
-  <div class="card" id="mainCard">
-    <div class="heart">❤️</div>
-    <h1 id="title">Hey…</h1>
+  <!-- Confetti hearts layer -->
+  <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
 
-    <div class="typing" id="typing"></div>
+  <div class="page">
+    <div class="card-shell">
+      <div class="heartbeat-orbit">
+        <div class="heartbeat"></div>
+      </div>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes 💖</button>
-      <button id="maybeBtn">Maybe 🙈</button>
+      <!-- Start overlay -->
+      <div class="overlay" id="start-overlay">
+        <div class="overlay-inner">
+          <p class="overlay-title">Hey… someone made this just for you 💌</p>
+          <p class="overlay-sub">
+            Take a slow breath, press the button, and let the page tell you what your heart already knows.
+          </p>
+          <button class="btn-primary" id="start-btn">
+            <span>Begin the little love story</span> <span>➜</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="content">
+        <!-- Intro -->
+        <section class="section intro" id="intro-section">
+          <p class="eyebrow">A quiet little confession</p>
+          <h1 class="intro-title">
+            This page only exists<br />
+            because <em>you</em> do.
+          </h1>
+          <p class="intro-subtitle">
+            Somewhere between every half-finished thought and every stolen glance,
+            someone realized that their favorite feeling was simply being around you.
+          </p>
+          <div class="start-cta">
+            <button class="btn-primary" id="replay-btn" style="display: none;">
+              <span>Replay the messages</span>
+            </button>
+            <span class="start-hint" id="start-hint" style="display: none;">
+              ☁︎ Soft words are appearing just below…
+            </span>
+          </div>
+        </section>
+
+        <!-- Typewriter messages -->
+        <section class="section typewriter-section" id="typewriter-section">
+          <p class="typewriter-label">From my heart, to your screen</p>
+          <div class="typewriter-bubble">
+            <div class="typewriter-text" id="typewriter-text"></div>
+            <span class="typewriter-caret" id="typewriter-caret"></span>
+          </div>
+        </section>
+
+        <!-- Compliments -->
+        <section class="section compliments-section" id="compliments-section">
+          <div class="compliments-grid">
+            <article class="compliment-card">
+              <span class="compliment-tag">Your presence</span>
+              <h3 class="compliment-title">You turn ordinary into magic.</h3>
+              <p class="compliment-body">
+                Rooms feel softer, jokes land easier, and time runs kinder whenever you’re near. You are the quiet highlight of every day.
+              </p>
+            </article>
+            <article class="compliment-card">
+              <span class="compliment-tag">Your heart</span>
+              <h3 class="compliment-title">You care in ways that linger.</h3>
+              <p class="compliment-body">
+                The way you listen, remember the small things, and show up for people is the kind of gentle that the world doesn’t deserve—but desperately needs.
+              </p>
+            </article>
+            <article class="compliment-card">
+              <span class="compliment-tag">Your mind</span>
+              <h3 class="compliment-title">You make every conversation glow.</h3>
+              <p class="compliment-body">
+                Your thoughts, your humor, your way of seeing the world—it’s all endlessly interesting. Talking to you feels like discovering new favorite pages in a book I never want to finish.
+              </p>
+            </article>
+            <article class="compliment-card">
+              <span class="compliment-tag">You, simply</span>
+              <h3 class="compliment-title">You’re my favorite “what if” turned real.</h3>
+              <p class="compliment-body">
+                Out of all the people on this planet, my heart looked at you and quietly decided, “Yes. That one. Please.”
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Final ask -->
+        <section class="section final-section" id="final-section">
+          <p class="final-question">
+            So… if it isn’t too much to ask,<br />
+            <strong>Will you be my Valentine? 💖</strong>
+          </p>
+          <div class="final-actions">
+            <button class="btn-yes" id="yes-btn">Yes, of course ✨</button>
+            <button class="btn-maybe" id="maybe-btn">I’ll pretend to think about it</button>
+          </div>
+          <p class="final-note" id="final-note">
+            (Tiny secret: my heart is already doing that excited little dance just picturing you saying yes.)
+          </p>
+        </section>
+      </div>
     </div>
   </div>
 
-  <div class="card final" id="finalCard">
-    <div class="heart">💞</div>
-    <h2>You just made my day!</h2>
-    <p>So… when are we going for coffee? ☕😌</p>
-  </div>
-
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name");
+    // --- Utility: add a few more floating hearts for variety ---
+    (function addExtraHearts() {
+      const container = document.querySelector(".floating-hearts");
+      if (!container) return;
+      const count = 10;
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement("div");
+        h.className = "floating-heart";
+        const left = Math.random() * 100;
+        const duration = 18 + Math.random() * 14;
+        const delay = -Math.random() * 24;
+        h.style.left = left + "%";
+        h.style.animationDuration = duration + "s";
+        h.style.animationDelay = delay + "s";
+        container.appendChild(h);
+      }
+    })();
 
-    const title = document.getElementById("title");
-    if (name) {
-      title.innerText = `Hey ${name}…`;
+    // --- Start / intro logic ---
+    const startBtn = document.getElementById("start-btn");
+    const startOverlay = document.getElementById("start-overlay");
+    const introSection = document.getElementById("intro-section");
+    const typewriterSection = document.getElementById("typewriter-section");
+    const complimentsSection = document.getElementById("compliments-section");
+    const finalSection = document.getElementById("final-section");
+    const replayBtn = document.getElementById("replay-btn");
+    const startHint = document.getElementById("start-hint");
+
+    function revealSectionsSequentially() {
+      // Fade in sections with stagger
+      const sections = [introSection, typewriterSection, complimentsSection, finalSection];
+      sections.forEach((sec, index) => {
+        setTimeout(() => {
+          sec.classList.add("visible");
+        }, 250 + index * 220);
+      });
     }
 
-    const text = [
-      "I was thinking about you.",
-      "So I made this little page…",
-      "Because some people deserve a smile.",
-      "And maybe… a date? 💌"
+    startBtn.addEventListener("click", () => {
+      document.body.classList.add("started");
+      startOverlay.classList.add("hidden");
+      revealSectionsSequentially();
+      startTypewriter();
+      startHint.style.display = "inline";
+      replayBtn.style.display = "inline-flex";
+    });
+
+    replayBtn.addEventListener("click", () => {
+      startTypewriter(true);
+    });
+
+    // --- Typewriter effect ---
+    const messages = [
+      "I don’t think you realize just how softly you’ve rewritten my idea of happiness.",
+      "Even on quiet days, when nothing ‘special’ happens, knowing you exist makes the world feel like it’s humming in the background.",
+      "You are not just something I want to experience once; you are the kind of person I want to keep discovering, slowly, for a very long time.",
+      "If feelings were constellations, every path my heart traces keeps leading gently back to you."
     ];
 
-    const typingEl = document.getElementById("typing");
-    let i = 0, j = 0;
+    const typeWriterTextEl = document.getElementById("typewriter-text");
+    const caretEl = document.getElementById("typewriter-caret");
 
-    function type() {
-      if (i < text.length) {
-        if (j < text[i].length) {
-          typingEl.innerHTML += text[i][j];
-          j++;
-          setTimeout(type, 40);
-        } else {
-          typingEl.innerHTML += "<br/>";
-          i++;
-          j = 0;
-          setTimeout(type, 600);
-        }
+    let msgIndex = 0;
+    let charIndex = 0;
+    let typeTimer = null;
+
+    function clearTypewriter() {
+      if (typeTimer) {
+        clearTimeout(typeTimer);
+        typeTimer = null;
+      }
+      msgIndex = 0;
+      charIndex = 0;
+      typeWriterTextEl.textContent = "";
+    }
+
+    function typeNextChar() {
+      const currentMessage = messages[msgIndex];
+      if (!currentMessage) return;
+
+      if (charIndex <= currentMessage.length) {
+        typeWriterTextEl.textContent = currentMessage.slice(0, charIndex);
+        charIndex++;
+        const baseDelay = 42;
+        const randomOffset = Math.random() * 40;
+        typeTimer = setTimeout(typeNextChar, baseDelay + randomOffset);
+      } else {
+        // pause then move to next message
+        setTimeout(() => {
+          msgIndex++;
+          if (msgIndex < messages.length) {
+            charIndex = 0;
+            typeWriterTextEl.textContent = "";
+            typeNextChar();
+          } else {
+            // finished all messages
+            caretEl.style.opacity = "0.4";
+          }
+        }, 1200);
       }
     }
-    type();
 
-    const maybeBtn = document.getElementById("maybeBtn");
-    maybeBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 100;
-      maybeBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    function startTypewriter(reset = false) {
+      caretEl.style.opacity = "1";
+      if (reset) {
+        clearTypewriter();
+      } else {
+        clearTypewriter();
+      }
+      // slight delay before starting
+      setTimeout(typeNextChar, 350);
+    }
 
-    const yesBtn = document.getElementById("yesBtn");
+    // --- Confetti hearts on YES ---
+    const yesBtn = document.getElementById("yes-btn");
+    const maybeBtn = document.getElementById("maybe-btn");
+    const finalNote = document.getElementById("final-note");
+    const confettiLayer = document.getElementById("confetti-layer");
+
+    function launchHeartConfetti() {
+      const colors = ["#ff8ad6", "#ffbfd6", "#ffd1ff", "#ffffff"];
+      const total = 80;
+
+      for (let i = 0; i < total; i++) {
+        const heart = document.createElement("span");
+        heart.className = "confetti-heart";
+        heart.textContent = "❤";
+        const left = Math.random() * 100;
+        const delay = Math.random() * 0.65;
+        const size = 14 + Math.random() * 12;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        heart.style.left = left + "vw";
+        heart.style.fontSize = size + "px";
+        heart.style.color = color;
+        heart.style.animationDelay = delay + "s";
+        confettiLayer.appendChild(heart);
+
+        heart.addEventListener("animationend", () => {
+          heart.remove();
+        });
+      }
+    }
+
     yesBtn.addEventListener("click", () => {
-      document.getElementById("mainCard").style.display = "none";
-      document.getElementById("finalCard").style.display = "block";
-      confetti();
+      launchHeartConfetti();
+      yesBtn.disabled = true;
+      maybeBtn.disabled = true;
+      yesBtn.textContent = "You already were ❤️";
+      maybeBtn.style.opacity = "0.4";
+      finalNote.textContent =
+        "Thank you for saying yes. Somewhere, a very smitten heart is saving this moment forever.";
     });
 
-    function confetti() {
-      for (let i = 0; i < 80; i++) {
-        const c = document.createElement("div");
-        c.className = "confetti";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
-        c.style.animationDuration = 2 + Math.random() * 2 + "s";
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 4000);
-      }
-    }
+    maybeBtn.addEventListener("click", () => {
+      finalNote.textContent =
+        "Take all the time you need—my heart is patient, and it still secretly hopes you’ll say yes.";
+    });
   </script>
-
 </body>
 </html>
