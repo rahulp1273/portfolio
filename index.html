@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Be rahul Valentine</title>
+  <title>Be My Valentine 💝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google Fonts -->
@@ -13,15 +13,11 @@
       --bg-gradient: radial-gradient(circle at top left, #ff9aee 0, transparent 55%),
                      radial-gradient(circle at bottom right, #8b5dff 0, transparent 55%),
                      linear-gradient(135deg, #12001f, #2b0038 50%, #4a0056 100%);
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.3);
       --accent: #ff77c8;
       --accent-strong: #ff3f9f;
       --text-main: #ffffff;
       --text-muted: #f7d6ff;
       --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --blur: 18px;
-      --transition-fast: 0.3s ease;
     }
 
     * {
@@ -38,11 +34,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
+      padding: 10px;
     }
 
-    /* Background floating hearts */
+    /* Floating hearts background */
     .floating-hearts {
       position: fixed;
       inset: 0;
@@ -53,203 +50,144 @@
 
     .floating-heart {
       position: absolute;
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle at 30% 30%, #fff 0, #ff73c4 45%, #ff3f9f 75%);
-      transform: rotate(45deg);
-      opacity: 0.18;
+      font-size: 20px;
+      opacity: 0.3;
       animation: floatUp linear infinite;
-      filter: drop-shadow(0 0 6px rgba(255, 120, 200, 0.65));
-    }
-
-    .floating-heart::before,
-    .floating-heart::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: inherit;
-    }
-
-    .floating-heart::before {
-      top: -50%;
-      left: 0;
-    }
-
-    .floating-heart::after {
-      left: -50%;
-      top: 0;
+      filter: drop-shadow(0 0 8px rgba(255, 120, 200, 0.6));
     }
 
     @keyframes floatUp {
       0% {
-        transform: translateY(100vh) rotate(45deg) scale(0.7);
+        transform: translateY(100vh) rotate(0deg);
         opacity: 0;
       }
       15% {
-        opacity: 0.35;
+        opacity: 0.4;
       }
       85% {
-        opacity: 0.22;
+        opacity: 0.3;
       }
       100% {
-        transform: translateY(-20vh) rotate(45deg) scale(1);
+        transform: translateY(-20vh) rotate(360deg);
         opacity: 0;
       }
     }
 
-    /* Layout containers */
+    /* Cute cats floating */
+    .floating-cats {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-cat {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.25;
+      animation: floatSideways 25s ease-in-out infinite;
+    }
+
+    @keyframes floatSideways {
+      0%, 100% {
+        transform: translateX(-20px) translateY(0) rotate(-5deg);
+      }
+      50% {
+        transform: translateX(20px) translateY(-15px) rotate(5deg);
+      }
+    }
+
+    /* Main container */
     .page {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 960px;
-      padding: 24px 18px 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      max-width: 500px;
+      padding: 15px;
     }
 
     .card-shell {
       width: 100%;
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.13),
-        rgba(255, 255, 255, 0.03)
-      );
-      border-radius: 26px;
-      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: var(--shadow-soft);
-      padding: 22px 18px 26px;
+      padding: 25px 20px;
       position: relative;
       overflow: hidden;
     }
 
-    @media (min-width: 640px) {
-      .card-shell {
-        padding: 30px 32px 36px;
-        border-radius: 30px;
-      }
-    }
-
-    /* Decorative glow ring */
+    /* Decorative glow */
     .card-shell::before {
       content: "";
       position: absolute;
-      width: 260px;
-      height: 260px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 118, 209, 0.6), transparent 60%);
-      top: -120px;
-      right: -80px;
-      opacity: 0.5;
+      background: radial-gradient(circle, rgba(255, 118, 209, 0.5), transparent 60%);
+      top: -100px;
+      right: -60px;
+      opacity: 0.6;
       mix-blend-mode: screen;
       pointer-events: none;
     }
 
-    /* Heartbeat emblem */
-    .heartbeat-orbit {
+    /* Heartbeat animation in corner */
+    .heartbeat-corner {
       position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 1px dashed rgba(255, 255, 255, 0.35);
-      top: 16px;
-      left: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
-    .heartbeat-orbit::before {
-      content: "";
-      position: absolute;
-      width: 170%;
-      height: 170%;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-top-color: rgba(255, 136, 210, 0.6);
-      border-left-color: rgba(205, 138, 255, 0.6);
-      animation: orbitSpin 24s linear infinite;
-    }
-
-    @keyframes orbitSpin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .heartbeat {
-      position: relative;
-      width: 60px;
-      height: 54px;
-      transform: scale(1);
-      animation: heartbeat 1.4s ease-in-out infinite;
-      filter: drop-shadow(0 0 16px rgba(255, 80, 170, 0.85));
-    }
-
-    .heartbeat::before,
-    .heartbeat::after {
-      content: "";
-      position: absolute;
-      width: 30px;
-      height: 48px;
-      background: linear-gradient(135deg, #ff9ad7, #ff3f9f);
-      border-radius: 30px 30px 0 0;
-    }
-
-    .heartbeat::before {
-      left: 4px;
-      transform: rotate(-45deg);
-      transform-origin: bottom right;
-    }
-
-    .heartbeat::after {
-      right: 4px;
-      transform: rotate(45deg);
-      transform-origin: bottom left;
+      top: 20px;
+      right: 20px;
+      font-size: 40px;
+      animation: heartbeat 1.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 15px rgba(255, 80, 170, 0.9));
+      z-index: 2;
     }
 
     @keyframes heartbeat {
-      0%,
-      28%,
-      62%,
-      100% {
+      0%, 30%, 60%, 100% {
         transform: scale(1);
       }
-      14%,
-      48% {
-        transform: scale(1.15);
+      15%, 45% {
+        transform: scale(1.2);
       }
     }
 
-    /* Content sections */
+    /* Cute cat in corner */
+    .cat-corner {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 35px;
+      animation: wiggle 3s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes wiggle {
+      0%, 100% {
+        transform: rotate(-5deg);
+      }
+      50% {
+        transform: rotate(5deg);
+      }
+    }
+
+    /* Content */
     .content {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 25px;
       position: relative;
       z-index: 1;
-    }
-
-    @media (min-width: 800px) {
-      .content {
-        gap: 26px;
-        padding-left: 140px;
-      }
+      margin-top: 10px;
     }
 
     .section {
       opacity: 0;
-      transform: translateY(18px);
-      transition:
-        opacity 0.7s ease-out,
-        transform 0.7s ease-out;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
     }
 
     .section.visible {
@@ -257,248 +195,192 @@
       transform: translateY(0);
     }
 
-    /* Landing / intro */
+    /* Intro section */
     .intro {
-      text-align: left;
+      text-align: center;
     }
 
     .eyebrow {
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255, 210, 255, 0.7);
-      margin-bottom: 8px;
+      color: rgba(255, 210, 255, 0.8);
+      margin-bottom: 10px;
     }
 
     .intro-title {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-weight: 600;
-      font-size: 1.9rem;
-      line-height: 1.25;
-      margin-bottom: 12px;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-bottom: 15px;
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 480px) {
       .intro-title {
-        font-size: 2.3rem;
+        font-size: 2rem;
       }
     }
 
     .intro-subtitle {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      max-width: 30rem;
+      line-height: 1.6;
     }
 
-    .start-cta {
-      margin-top: 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      border: none;
-      outline: none;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 10px 22px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #fff;
-      box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.55),
-        0 0 0 1px rgba(255, 255, 255, 0.35);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition:
-        transform var(--transition-fast),
-        box-shadow var(--transition-fast),
-        filter var(--transition-fast);
-    }
-
-    .btn-primary span {
-      font-size: 1.05rem;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.02);
-      box-shadow:
-        0 16px 36px rgba(0, 0, 0, 0.7),
-        0 0 18px rgba(255, 124, 196, 0.8);
-    }
-
-    .btn-primary:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow:
-        0 10px 22px rgba(0, 0, 0, 0.55),
-        0 0 12px rgba(255, 124, 196, 0.7);
-    }
-
-    .start-hint {
-      font-size: 0.8rem;
-      color: rgba(255, 226, 255, 0.7);
+    .from-rahul {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: rgba(255, 180, 255, 0.9);
+      font-style: italic;
     }
 
     /* Typewriter section */
     .typewriter-section {
-      margin-top: 4px;
-      min-height: 72px;
+      margin-top: 10px;
+      min-height: 80px;
     }
 
     .typewriter-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: rgba(255, 215, 255, 0.7);
-      margin-bottom: 6px;
+      letter-spacing: 0.12em;
+      color: rgba(255, 215, 255, 0.8);
+      margin-bottom: 8px;
+      text-align: center;
     }
 
     .typewriter-bubble {
-      border-radius: 18px;
-      padding: 12px 14px;
-      max-width: 30rem;
-      background: radial-gradient(circle at top left, rgba(255, 153, 228, 0.32), transparent 65%),
-                  rgba(5, 2, 12, 0.4);
-      border: 1px solid rgba(255, 188, 255, 0.45);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
-      font-size: 0.95rem;
-      position: relative;
-      overflow: hidden;
+      border-radius: 20px;
+      padding: 15px 18px;
+      background: radial-gradient(circle at top left, rgba(255, 153, 228, 0.3), transparent 70%),
+                  rgba(8, 3, 18, 0.5);
+      border: 1px solid rgba(255, 188, 255, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: center;
     }
 
     .typewriter-text {
       white-space: pre-wrap;
-      min-height: 1.3em;
+      min-height: 1.5em;
     }
 
     .typewriter-caret {
       display: inline-block;
-      width: 8px;
-      margin-left: 2px;
+      width: 2px;
+      height: 1em;
+      margin-left: 3px;
       background: rgba(255, 255, 255, 0.9);
-      border-radius: 99px;
-      animation: caretBlink 0.9s steps(1, end) infinite;
+      vertical-align: text-bottom;
+      animation: caretBlink 0.9s steps(1) infinite;
     }
 
     @keyframes caretBlink {
-      0%,
-      50% {
+      0%, 50% {
         opacity: 1;
       }
-      51%,
-      100% {
+      51%, 100% {
         opacity: 0;
       }
     }
 
-    /* Compliment cards */
-    .compliments-section {
-      margin-top: 8px;
+    /* Cute emojis row */
+    .emoji-row {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 30px;
+      margin: 15px 0;
+      animation: bounce 2s ease-in-out infinite;
     }
 
-    .compliments-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 10px;
+    .emoji-row span {
+      display: inline-block;
+      animation: spinSlow 4s linear infinite;
     }
 
-    @media (min-width: 640px) {
-      .compliments-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .emoji-row span:nth-child(2) {
+      animation-delay: -1.3s;
+    }
+
+    .emoji-row span:nth-child(3) {
+      animation-delay: -2.6s;
+    }
+
+    @keyframes spinSlow {
+      0%, 100% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(10deg) scale(1.1);
       }
     }
 
-    .compliment-card {
-      background: linear-gradient(
-        140deg,
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.04)
-      );
-      border-radius: 18px;
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 210, 255, 0.4);
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .compliment-tag {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(255, 215, 255, 0.8);
-    }
-
-    .compliment-title {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: 1.05rem;
-    }
-
-    .compliment-body {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
     }
 
     /* Final question */
     .final-section {
-      margin-top: 10px;
+      margin-top: 15px;
       border-top: 1px solid rgba(255, 220, 255, 0.25);
-      padding-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      padding-top: 20px;
+      text-align: center;
     }
 
     .final-question {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: 1.4rem;
-      line-height: 1.25;
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 480px) {
+      .final-question {
+        font-size: 1.5rem;
+      }
     }
 
     .final-actions {
       display: flex;
+      flex-direction: column;
+      gap: 12px;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
     }
 
     .btn-yes,
     .btn-maybe {
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-size: 0.9rem;
+      width: 100%;
+      max-width: 280px;
+      border-radius: 50px;
+      padding: 12px 25px;
+      font-size: 1rem;
       font-weight: 500;
       cursor: pointer;
       border: 1px solid rgba(255, 235, 255, 0.7);
       background: rgba(12, 3, 24, 0.6);
       color: #ffe9ff;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
-      transition:
-        transform var(--transition-fast),
-        box-shadow var(--transition-fast),
-        background var(--transition-fast),
-        color var(--transition-fast),
-        border-color var(--transition-fast);
+      transition: all 0.3s ease;
     }
 
     .btn-yes {
       background: linear-gradient(135deg, #ff7ad3, #ff3f9f);
       color: #fff;
       border-color: rgba(255, 255, 255, 0.85);
+      font-size: 1.1rem;
     }
 
     .btn-yes:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 14px 30px rgba(0, 0, 0, 0.75),
-        0 0 18px rgba(255, 124, 196, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 124, 196, 0.9);
     }
 
     .btn-maybe {
@@ -514,6 +396,8 @@
     .final-note {
       font-size: 0.8rem;
       color: rgba(255, 220, 255, 0.75);
+      margin-top: 15px;
+      line-height: 1.5;
     }
 
     /* Confetti hearts */
@@ -522,106 +406,146 @@
       inset: 0;
       overflow: hidden;
       pointer-events: none;
-      z-index: 4;
+      z-index: 999;
     }
 
     .confetti-heart {
       position: absolute;
-      font-size: 18px;
-      animation: confettiFall 2.8s cubic-bezier(0.16, 0.74, 0.28, 0.99) forwards;
-      text-shadow: 0 0 10px rgba(255, 120, 200, 0.85);
+      font-size: 20px;
+      animation: confettiFall 3s cubic-bezier(0.16, 0.74, 0.28, 0.99) forwards;
+      filter: drop-shadow(0 0 10px rgba(255, 120, 200, 0.8));
     }
 
     @keyframes confettiFall {
       0% {
-        transform: translateY(-10vh) translateX(0) rotate(0deg) scale(0.9);
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
         opacity: 0;
       }
       10% {
         opacity: 1;
       }
-      60% {
-        opacity: 1;
-      }
       100% {
-        transform: translateY(110vh) translateX(40px) rotate(520deg) scale(1.1);
+        transform: translateY(110vh) translateX(60px) rotate(720deg);
         opacity: 0;
       }
     }
 
-    /* Start overlay (landing state) */
+    /* Start overlay */
     .overlay {
       position: absolute;
       inset: 0;
-      z-index: 3;
-      background: radial-gradient(circle at top, rgba(24, 3, 44, 0.7), transparent 60%),
-                  rgba(6, 2, 16, 0.9);
+      z-index: 10;
+      background: radial-gradient(circle at top, rgba(24, 3, 44, 0.8), transparent 60%),
+                  rgba(6, 2, 16, 0.95);
       display: flex;
       align-items: center;
       justify-content: center;
       transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+      border-radius: 30px;
     }
 
     .overlay.hidden {
       opacity: 0;
       visibility: hidden;
+      pointer-events: none;
     }
 
     .overlay-inner {
-      max-width: 420px;
       text-align: center;
-      padding: 22px 16px;
+      padding: 30px 20px;
     }
 
     .overlay-title {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: 1.7rem;
-      line-height: 1.3;
-      margin-bottom: 12px;
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: 480px) {
+      .overlay-title {
+        font-size: 1.8rem;
+      }
     }
 
     .overlay-sub {
       font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 18px;
+      margin-bottom: 25px;
+      line-height: 1.6;
     }
 
-    /* Visibility control when started */
-    body.started .section {
-      /* base sections become visible (JS toggles .visible) */
+    .btn-primary {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 50px;
+      padding: 14px 30px;
+      font-size: 1rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 124, 196, 0.9);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Sparkle effect */
+    .sparkles {
+      position: absolute;
+      font-size: 20px;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Background hearts -->
-  <div class="floating-hearts" aria-hidden="true">
-    <!-- Hearts will be appended via JS for variety; some base ones for no-JS feel -->
-    <div class="floating-heart" style="left: 5%; animation-duration: 23s; animation-delay: -8s;"></div>
-    <div class="floating-heart" style="left: 18%; animation-duration: 19s; animation-delay: -4s;"></div>
-    <div class="floating-heart" style="left: 32%; animation-duration: 27s; animation-delay: -10s;"></div>
-    <div class="floating-heart" style="left: 50%; animation-duration: 21s; animation-delay: -16s;"></div>
-    <div class="floating-heart" style="left: 68%; animation-duration: 25s; animation-delay: -7s;"></div>
-    <div class="floating-heart" style="left: 84%; animation-duration: 20s; animation-delay: -12s;"></div>
-  </div>
+  <!-- Floating hearts background -->
+  <div class="floating-hearts" aria-hidden="true"></div>
+  
+  <!-- Floating cats background -->
+  <div class="floating-cats" aria-hidden="true"></div>
 
-  <!-- Confetti hearts layer -->
+  <!-- Confetti layer -->
   <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
 
   <div class="page">
     <div class="card-shell">
-      <div class="heartbeat-orbit">
-        <div class="heartbeat"></div>
-      </div>
+      <!-- Cute decorations -->
+      <div class="cat-corner">🐱</div>
+      <div class="heartbeat-corner">💖</div>
 
       <!-- Start overlay -->
       <div class="overlay" id="start-overlay">
         <div class="overlay-inner">
-          <p class="overlay-title">Hey… someone made this just for you 💌</p>
+          <p class="overlay-title">Hey pookie... 💝</p>
           <p class="overlay-sub">
-            Take a slow breath, press the button, and let the page tell you what your heart already knows.
+            Someone made something special just for you.<br>
+            Press the button and see what happens ✨
           </p>
           <button class="btn-primary" id="start-btn">
-            <span>Begin the little love story</span> <span>➜</span>
+            <span>Open Your Heart</span> <span>💕</span>
           </button>
         </div>
       </div>
@@ -630,80 +554,48 @@
       <div class="content">
         <!-- Intro -->
         <section class="section intro" id="intro-section">
-          <p class="eyebrow">A quiet little confession</p>
+          <p class="eyebrow">💌 A message for you</p>
           <h1 class="intro-title">
-            This page only exists<br />
-            because <em>you</em> do.
+            You make everything<br />
+            feel like magic ✨
           </h1>
           <p class="intro-subtitle">
-            Somewhere between every half-finished thought and every stolen glance,
-            someone realized that their favorite feeling was simply being around you.
+            Every moment with you feels like finding the last puzzle piece I didn't know was missing.
+            You're not just special... you're everything.
           </p>
-          <div class="start-cta">
-            <button class="btn-primary" id="replay-btn" style="display: none;">
-              <span>Replay the messages</span>
-            </button>
-            <span class="start-hint" id="start-hint" style="display: none;">
-              ☁︎ Soft words are appearing just below…
-            </span>
+          <p class="from-rahul">~ From Rahul, all the way from Japan 🗾💕</p>
+        </section>
+
+        <!-- Cute emojis -->
+        <section class="section">
+          <div class="emoji-row">
+            <span>🐈</span>
+            <span>💝</span>
+            <span>🌸</span>
           </div>
         </section>
 
         <!-- Typewriter messages -->
         <section class="section typewriter-section" id="typewriter-section">
-          <p class="typewriter-label">From my heart, to your screen</p>
+          <p class="typewriter-label">💭 What I want to say...</p>
           <div class="typewriter-bubble">
             <div class="typewriter-text" id="typewriter-text"></div>
             <span class="typewriter-caret" id="typewriter-caret"></span>
           </div>
         </section>
 
-        <!-- Compliments -->
-        <section class="section compliments-section" id="compliments-section">
-          <div class="compliments-grid">
-            <article class="compliment-card">
-              <span class="compliment-tag">Your presence</span>
-              <h3 class="compliment-title">You turn ordinary into magic.</h3>
-              <p class="compliment-body">
-                Rooms feel softer, jokes land easier, and time runs kinder whenever you’re near. You are the quiet highlight of every day.
-              </p>
-            </article>
-            <article class="compliment-card">
-              <span class="compliment-tag">Your heart</span>
-              <h3 class="compliment-title">You care in ways that linger.</h3>
-              <p class="compliment-body">
-                The way you listen, remember the small things, and show up for people is the kind of gentle that the world doesn’t deserve—but desperately needs.
-              </p>
-            </article>
-            <article class="compliment-card">
-              <span class="compliment-tag">Your mind</span>
-              <h3 class="compliment-title">You make every conversation glow.</h3>
-              <p class="compliment-body">
-                Your thoughts, your humor, your way of seeing the world—it’s all endlessly interesting. Talking to you feels like discovering new favorite pages in a book I never want to finish.
-              </p>
-            </article>
-            <article class="compliment-card">
-              <span class="compliment-tag">You, simply</span>
-              <h3 class="compliment-title">You’re my favorite “what if” turned real.</h3>
-              <p class="compliment-body">
-                Out of all the people on this planet, my heart looked at you and quietly decided, “Yes. That one. Please.”
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <!-- Final ask -->
+        <!-- Final question -->
         <section class="section final-section" id="final-section">
           <p class="final-question">
-            So… if it isn’t too much to ask,<br />
+            So... my pookie,<br />
             <strong>Will you be my Valentine? 💖</strong>
           </p>
           <div class="final-actions">
-            <button class="btn-yes" id="yes-btn">Yes, of course ✨</button>
-            <button class="btn-maybe" id="maybe-btn">I’ll pretend to think about it</button>
+            <button class="btn-yes" id="yes-btn">Yes! Of course! 💕✨</button>
+            <button class="btn-maybe" id="maybe-btn">Let me think... 🤔</button>
           </div>
           <p class="final-note" id="final-note">
-            (Tiny secret: my heart is already doing that excited little dance just picturing you saying yes.)
+            (I'm already smiling just imagining you saying yes... 😊💗)
           </p>
         </section>
       </div>
@@ -711,63 +603,81 @@
   </div>
 
   <script>
-    // --- Utility: add a few more floating hearts for variety ---
-    (function addExtraHearts() {
+    // Add floating hearts
+    (function addFloatingHearts() {
       const container = document.querySelector(".floating-hearts");
       if (!container) return;
-      const count = 10;
-      for (let i = 0; i < count; i++) {
-        const h = document.createElement("div");
-        h.className = "floating-heart";
-        const left = Math.random() * 100;
-        const duration = 18 + Math.random() * 14;
-        const delay = -Math.random() * 24;
-        h.style.left = left + "%";
-        h.style.animationDuration = duration + "s";
-        h.style.animationDelay = delay + "s";
-        container.appendChild(h);
+      const heartEmojis = ['❤️', '💕', '💖', '💗', '💝', '💓'];
+      
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement("div");
+        heart.className = "floating-heart";
+        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDuration = (20 + Math.random() * 15) + "s";
+        heart.style.animationDelay = -(Math.random() * 20) + "s";
+        container.appendChild(heart);
       }
     })();
 
-    // --- Start / intro logic ---
+    // Add floating cats
+    (function addFloatingCats() {
+      const container = document.querySelector(".floating-cats");
+      if (!container) return;
+      const catEmojis = ['🐱', '😺', '😸', '🐈'];
+      
+      for (let i = 0; i < 6; i++) {
+        const cat = document.createElement("div");
+        cat.className = "floating-cat";
+        cat.textContent = catEmojis[Math.floor(Math.random() * catEmojis.length)];
+        cat.style.top = (10 + Math.random() * 80) + "%";
+        cat.style.left = (Math.random() * 100) + "%";
+        cat.style.animationDelay = -(Math.random() * 25) + "s";
+        container.appendChild(cat);
+      }
+    })();
+
+    // Add sparkles
+    function addSparkles() {
+      const card = document.querySelector(".card-shell");
+      const sparkleEmojis = ['✨', '⭐', '🌟', '💫'];
+      
+      for (let i = 0; i < 5; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkles";
+        sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+        sparkle.style.top = Math.random() * 100 + "%";
+        sparkle.style.left = Math.random() * 100 + "%";
+        sparkle.style.animationDelay = (Math.random() * 2) + "s";
+        card.appendChild(sparkle);
+      }
+    }
+    addSparkles();
+
+    // Start button logic
     const startBtn = document.getElementById("start-btn");
     const startOverlay = document.getElementById("start-overlay");
-    const introSection = document.getElementById("intro-section");
-    const typewriterSection = document.getElementById("typewriter-section");
-    const complimentsSection = document.getElementById("compliments-section");
-    const finalSection = document.getElementById("final-section");
-    const replayBtn = document.getElementById("replay-btn");
-    const startHint = document.getElementById("start-hint");
+    const sections = document.querySelectorAll(".section");
 
-    function revealSectionsSequentially() {
-      // Fade in sections with stagger
-      const sections = [introSection, typewriterSection, complimentsSection, finalSection];
+    startBtn.addEventListener("click", () => {
+      startOverlay.classList.add("hidden");
+      
       sections.forEach((sec, index) => {
         setTimeout(() => {
           sec.classList.add("visible");
-        }, 250 + index * 220);
+        }, 200 + index * 300);
       });
-    }
-
-    startBtn.addEventListener("click", () => {
-      document.body.classList.add("started");
-      startOverlay.classList.add("hidden");
-      revealSectionsSequentially();
-      startTypewriter();
-      startHint.style.display = "inline";
-      replayBtn.style.display = "inline-flex";
+      
+      setTimeout(() => {
+        startTypewriter();
+      }, 800);
     });
 
-    replayBtn.addEventListener("click", () => {
-      startTypewriter(true);
-    });
-
-    // --- Typewriter effect ---
+    // Typewriter effect - only 2-3 messages
     const messages = [
-      "I don’t think you realize just how softly you’ve rewritten my idea of happiness.",
-      "Even on quiet days, when nothing ‘special’ happens, knowing you exist makes the world feel like it’s humming in the background.",
-      "You are not just something I want to experience once; you are the kind of person I want to keep discovering, slowly, for a very long time.",
-      "If feelings were constellations, every path my heart traces keeps leading gently back to you."
+      "You're the reason I smile without even thinking about it 😊💕",
+      "Being with you feels like home, no matter where we are 🏠💗",
+      "You're my favorite person in the whole world 🌍✨"
     ];
 
     const typeWriterTextEl = document.getElementById("typewriter-text");
@@ -777,16 +687,6 @@
     let charIndex = 0;
     let typeTimer = null;
 
-    function clearTypewriter() {
-      if (typeTimer) {
-        clearTimeout(typeTimer);
-        typeTimer = null;
-      }
-      msgIndex = 0;
-      charIndex = 0;
-      typeWriterTextEl.textContent = "";
-    }
-
     function typeNextChar() {
       const currentMessage = messages[msgIndex];
       if (!currentMessage) return;
@@ -794,11 +694,8 @@
       if (charIndex <= currentMessage.length) {
         typeWriterTextEl.textContent = currentMessage.slice(0, charIndex);
         charIndex++;
-        const baseDelay = 42;
-        const randomOffset = Math.random() * 40;
-        typeTimer = setTimeout(typeNextChar, baseDelay + randomOffset);
+        typeTimer = setTimeout(typeNextChar, 40 + Math.random() * 40);
       } else {
-        // pause then move to next message
         setTimeout(() => {
           msgIndex++;
           if (msgIndex < messages.length) {
@@ -806,67 +703,54 @@
             typeWriterTextEl.textContent = "";
             typeNextChar();
           } else {
-            // finished all messages
-            caretEl.style.opacity = "0.4";
+            caretEl.style.opacity = "0.3";
           }
-        }, 1200);
+        }, 1500);
       }
     }
 
-    function startTypewriter(reset = false) {
+    function startTypewriter() {
+      msgIndex = 0;
+      charIndex = 0;
+      typeWriterTextEl.textContent = "";
       caretEl.style.opacity = "1";
-      if (reset) {
-        clearTypewriter();
-      } else {
-        clearTypewriter();
-      }
-      // slight delay before starting
-      setTimeout(typeNextChar, 350);
+      setTimeout(typeNextChar, 500);
     }
 
-    // --- Confetti hearts on YES ---
+    // Yes/Maybe button logic
     const yesBtn = document.getElementById("yes-btn");
     const maybeBtn = document.getElementById("maybe-btn");
     const finalNote = document.getElementById("final-note");
     const confettiLayer = document.getElementById("confetti-layer");
 
-    function launchHeartConfetti() {
-      const colors = ["#ff8ad6", "#ffbfd6", "#ffd1ff", "#ffffff"];
-      const total = 80;
+    function launchConfetti() {
+      const emojis = ['❤️', '💕', '💖', '💗', '💝', '🐱', '😺', '✨', '⭐', '🌸'];
+      
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement("span");
+        confetti.className = "confetti-heart";
+        confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.animationDelay = Math.random() * 0.8 + "s";
+        confettiLayer.appendChild(confetti);
 
-      for (let i = 0; i < total; i++) {
-        const heart = document.createElement("span");
-        heart.className = "confetti-heart";
-        heart.textContent = "❤";
-        const left = Math.random() * 100;
-        const delay = Math.random() * 0.65;
-        const size = 14 + Math.random() * 12;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        heart.style.left = left + "vw";
-        heart.style.fontSize = size + "px";
-        heart.style.color = color;
-        heart.style.animationDelay = delay + "s";
-        confettiLayer.appendChild(heart);
-
-        heart.addEventListener("animationend", () => {
-          heart.remove();
+        confetti.addEventListener("animationend", () => {
+          confetti.remove();
         });
       }
     }
 
     yesBtn.addEventListener("click", () => {
-      launchHeartConfetti();
+      launchConfetti();
       yesBtn.disabled = true;
       maybeBtn.disabled = true;
-      yesBtn.textContent = "You already were ❤️";
-      maybeBtn.style.opacity = "0.4";
-      finalNote.textContent =
-        "Thank you for saying yes. Somewhere, a very smitten heart is saving this moment forever.";
+      yesBtn.textContent = "You made my day! 💕✨";
+      maybeBtn.style.opacity = "0.3";
+      finalNote.textContent = "Thank you, pookie! My heart is doing backflips right now! 🥰💗 ~ Rahul";
     });
 
     maybeBtn.addEventListener("click", () => {
-      finalNote.textContent =
-        "Take all the time you need—my heart is patient, and it still secretly hopes you’ll say yes.";
+      finalNote.textContent = "Take all the time you need... but I'm already hoping for a yes 🥺💕";
     });
   </script>
 </body>
