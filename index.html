@@ -1,29 +1,230 @@
-<!-- TODO 1: Create the HTML Boilerplate -->
-<!-- TODO 2: Add Your previous projects' HTML into the public folder -->
-<!-- TODO 3: Take screenshots of your project previews and add the images to the images folder -->
-<!-- TODO 4: Add titles/subtitles etc. -->
-<!-- TODO 5: Add a link to the project pages -->
-<!-- TODO 6: Add images to show the project previews
-HINT for TODO 6: You can use the height attribute set to 200 to make the image smaller:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height -->
-<!-- TODO 7: Add the Contact Me and About Me page links -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>rahul Portfolio</title>
+  <meta charset="UTF-8" />
+  <title>Rahul 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #ff6b9c;
+      --red: #ff4d6d;
+      --bg1: #0f0c29;
+      --bg2: #302b63;
+      --bg3: #24243e;
+      --glass: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .heart {
+      font-size: 2.8rem;
+      animation: beat 1.2s infinite;
+      margin-bottom: 10px;
+    }
+
+    .typing {
+      font-size: 1rem;
+      min-height: 60px;
+      margin: 15px 0 25px;
+      opacity: 0.9;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      position: relative;
+    }
+
+    button {
+      padding: 12px 26px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, var(--pink), var(--red));
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.08);
+    }
+
+    #maybeBtn {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      position: relative;
+    }
+
+    .final {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .final h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      background: red;
+      animation: fall 3s linear forwards;
+      z-index: 999;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.9rem; }
+      .card { padding: 30px 20px; }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>rahul Portfolio</h1>
-    <h2>I'm a Web Developer</h2>
-    <hr />
-    <h3><a href="./public/movie-ranking.html">Movie Ranking Project</a></h3>
-    <img src="./assets/images/movie-ranking.png" height="200" alt="movie ranking project preview"/>
-    <h3><a href="./public/birthday-invite.html">Birthday Invite Project</a></h3>
-    <img src="./assets/images/birthday-invite.png" height="200" alt="birthday invite project preview"/>
-    <hr />
-    <a href="./public/about.html">About Me</a>
-    <a href="./public/contact.html">Contact Me</a>
+
+  <div class="card" id="mainCard">
+    <div class="heart">❤️</div>
+    <h1 id="title">Hey…</h1>
+
+    <div class="typing" id="typing"></div>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="maybeBtn">Maybe 🙈</button>
+    </div>
+  </div>
+
+  <div class="card final" id="finalCard">
+    <div class="heart">💞</div>
+    <h2>You just made my day!</h2>
+    <p>So… when are we going for coffee? ☕😌</p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+
+    const title = document.getElementById("title");
+    if (name) {
+      title.innerText = `Hey ${name}…`;
+    }
+
+    const text = [
+      "I was thinking about you.",
+      "So I made this little page…",
+      "Because some people deserve a smile.",
+      "And maybe… a date? 💌"
+    ];
+
+    const typingEl = document.getElementById("typing");
+    let i = 0, j = 0;
+
+    function type() {
+      if (i < text.length) {
+        if (j < text[i].length) {
+          typingEl.innerHTML += text[i][j];
+          j++;
+          setTimeout(type, 40);
+        } else {
+          typingEl.innerHTML += "<br/>";
+          i++;
+          j = 0;
+          setTimeout(type, 600);
+        }
+      }
+    }
+    type();
+
+    const maybeBtn = document.getElementById("maybeBtn");
+    maybeBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      maybeBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    const yesBtn = document.getElementById("yesBtn");
+    yesBtn.addEventListener("click", () => {
+      document.getElementById("mainCard").style.display = "none";
+      document.getElementById("finalCard").style.display = "block";
+      confetti();
+    });
+
+    function confetti() {
+      for (let i = 0; i < 80; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+        c.style.animationDuration = 2 + Math.random() * 2 + "s";
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
+      }
+    }
+  </script>
+
 </body>
 </html>
